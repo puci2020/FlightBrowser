@@ -1,0 +1,217 @@
+<div class="wrapper">
+    <div class="content">
+        <mdb-card id="search">
+            <mdb-card-body>
+                <mdb-card-title>
+                    <h5>Wyszukaj loty
+                    </h5>
+                </mdb-card-title>
+                <mdb-card-text>
+                    <form
+                        [formGroup]="form">
+                        <div
+                            class="form-row">
+                            <div
+                                class="col-md-11">
+                                <div
+                                    class="form-row">
+                                    <div
+                                        class="col-md-3">
+                                        <select
+                                            required
+                                            id="startPlace"
+                                            name="startPlace"
+                                            [formControl]="startPlace"
+                                            class="form-control browser-default custom-select">
+                                            <option
+                                                [ngValue]="null"
+                                                selected
+                                                disabled
+                                                value="">
+                                                Punkt
+                                                startowy
+                                            </option>
+                                            <option
+                                                *ngFor="let start of flightStart"
+                                                [value]="start">
+                                                {{start}}
+                                            </option>
+                                        </select>
+                                        <span
+                                            class="error"
+                                            *ngIf="startPlace.touched && !startPlace.valid">Wybierz
+                                            punkt
+                                            startowy</span>
+                                    </div>
+                                    <div
+                                        class="col-md-3">
+                                        <select
+                                            required
+                                            id="endPlace"
+                                            name="endPlace"
+                                            [formControl]="endPlace"
+                                            class="form-control browser-default custom-select">
+                                            <option
+                                                [ngValue]="null"
+                                                selected
+                                                disabled
+                                                value="">
+                                                Punkt
+                                                końcowy
+                                            </option>
+                                            <option
+                                                *ngFor="let end of flightEnd"
+                                                [value]="end">
+                                                {{end}}
+                                            </option>
+                                        </select>
+                                        <span
+                                            class="error"
+                                            *ngIf="endPlace.touched && !endPlace.valid">Wybierz
+                                            punkt
+                                            końcowy</span>
+                                    </div>
+                                    <div
+                                        class="col-md-3">
+                                        <input
+                                            required
+                                            class="form-control date-start"
+                                            type="text"
+                                            mwlFlatpickr
+                                            [formControl]="startDate"
+                                            (ngModelChange)="validateDate()"
+                                            name="date1"
+                                            [altInput]="true"
+                                            [allowInput]="true"
+                                            [convertModelValue]="true"
+                                            [enable]="enable"
+                                            [enableTime]="true"
+                                            [time24hr]="true"
+                                            dateFormat="Y-m-dTH:i"
+                                            altFormat="Y-m-d, H:i"
+                                            placeholder="YYYY-MM-DD, HH-MM" />
+                                    </div>
+                                    <div
+                                        class="col-md-3">
+                                        <input
+                                            required
+                                            class="form-control date-end"
+                                            type="text"
+                                            mwlFlatpickr
+                                            [formControl]="endDate"
+                                            (ngModelChange)="validateDate()"
+                                            name="date2"
+                                            [altInput]="true"
+                                            [allowInput]="true"
+                                            [convertModelValue]="true"
+                                            [enable]="enable"
+                                            [enableTime]="true"
+                                            [time24hr]="true"
+                                            dateFormat="Y-m-dTH:i"
+                                            altFormat="Y-m-d, H:i"
+                                            placeholder="YYYY-MM-DD, HH-MM" />
+                                        <span
+                                            class="error"
+                                            *ngIf="dateError">Data
+                                            przylotu
+                                            nie
+                                            może
+                                            być
+                                            wcześniejsza</span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div
+                                class="col-md-1 button">
+                                <button
+                                    [disabled]="!form.valid || dateError"
+                                    type="button"
+                                    mdbBtn
+                                    color="primary"
+                                    mdbWavesEffect
+                                    class="search_btn"
+                                    (click)="submitForm()">
+                                    <mdb-icon
+                                        fas
+                                        icon="search">
+                                    </mdb-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <button
+                        *ngIf="filter"
+                        (click)="clearFilters()"
+                        type="button"
+                        class="btn-sm"
+                        mdbBtn
+                        color="light"
+                        mdbWavesEffect>
+                        <mdb-icon fas
+                            icon="times">
+                        </mdb-icon>
+                        Wyczyść filtry
+                    </button>
+                </mdb-card-text>
+
+            </mdb-card-body>
+        </mdb-card>
+        <mdb-card id="list">
+            <mdb-card-body>
+                <mdb-card-title>
+                    <h5>Lista Lotów
+                    </h5>
+                </mdb-card-title>
+                <mdb-card-text
+                    *ngIf="filterFlights.length === 0">
+                    Brak lotów o
+                    podanych parametrach
+                </mdb-card-text>
+                <mdb-card-text>
+
+                    <table mdbTable
+                        small="true"
+                        striped="true">
+                        <tbody>
+                            <tr mdbTableCol
+                                *ngFor="let flight of filterFlights">
+                                <td>
+                                    {{flight.startPlace}}
+                                    ({{flight.shortStart}})
+                                </td>
+                                <td>
+                                    {{flight.endPlace}}
+                                    ({{flight.shortEnd}})
+                                </td>
+                                <td>
+                                    {{flight.startDate.getFullYear()}}-{{getMonth(flight.startDate.getMonth())}}-{{getDay(flight.startDate.getDay())}},
+                                    {{getHour(flight.startDate.getHours())}}:{{getMinute(flight.startDate.getMinutes())}}
+                                </td>
+                                <td>
+                                    <button
+                                        class="arrow"
+                                        routerLink="/reservations/{{flight.id}}">
+                                        <mdb-icon
+                                            far
+                                            icon="arrow-alt-circle-right">
+                                        </mdb-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div
+                        class="loadMore">
+                        <span>
+                            ZAŁADUJ
+                            WIĘCEJ
+                        </span>
+                    </div>
+                </mdb-card-text>
+
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

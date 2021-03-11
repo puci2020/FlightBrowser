@@ -1,0 +1,315 @@
+<div class="wrapper">
+    <div class="content">
+        <mdb-card id="search"
+            class="col-md-6">
+            <mdb-card-body>
+                <mdb-card-title class="title">
+                    <h5>Wyszukaj loty
+                    </h5>
+                    <span
+                        *ngIf="activeFlight">{{activeFlight[0].shortStart}}
+                        <mdb-icon fas
+                            icon="exchange-alt">
+                        </mdb-icon>
+                        {{activeFlight[0].shortEnd}}
+                    </span>
+                </mdb-card-title>
+                <mdb-card-text>
+                    <form
+                        [formGroup]="form">
+                        <div
+                            class="form-row">
+                            <div
+                                class="col-md-6">
+                                <label>Imię</label>
+                                <input
+                                    required
+                                    class="form-control"
+                                    type="text"
+                                    id="firstName"
+                                    name="firstName"
+                                    [formControl]="firstName"
+                                    placeholder="Imię">
+                                <span
+                                    class="error"
+                                    *ngIf="firstName.touched && !firstName.valid">Podaj
+                                    imię</span>
+                            </div>
+                            <div
+                                class="col-md-6">
+                                <label>Nazwisko</label>
+                                <input
+                                    required
+                                    class="form-control"
+                                    type="text"
+                                    id="lastName"
+                                    name="lastName"
+                                    [formControl]="lastName"
+                                    placeholder="Nazwisko">
+                                <span
+                                    class="error"
+                                    *ngIf="lastName.touched && !lastName.valid">Podaj
+                                    nazwisko</span>
+                            </div>
+                        </div>
+                        <div
+                            class="form-row">
+                            <div
+                                class="col-md-6">
+                                <label>Ilość
+                                    osób</label>
+                                <input
+                                    required
+                                    class="form-control"
+                                    type="number"
+                                    id="number"
+                                    name="number"
+                                    [formControl]="number"
+                                    placeholder="Liczba osób">
+                                <span
+                                    class="error"
+                                    *ngIf="number.touched && !number.valid">Podaj
+                                    liczbę
+                                    osób</span>
+                            </div>
+                            <div
+                                class="col-md-6">
+                                <label>Klasa</label>
+                                <select
+                                    required
+                                    id="flightClass"
+                                    name="flightClass"
+                                    [formControl]="flightClass"
+                                    class="form-control browser-default custom-select">
+                                    <option
+                                        selected
+                                        disabled
+                                        value=''>
+                                        Klasa
+                                    </option>
+                                    <option
+                                        value='Biznesowa'>
+                                        Standard
+                                    </option>
+                                    <option
+                                        value='Biznesowa'>
+                                        Biznesowa
+                                    </option>
+                                </select>
+                                <span
+                                    class="error"
+                                    *ngIf="flightClass.touched && !flightClass.valid">Wybierz
+                                    rodzaj
+                                    klasy</span>
+                            </div>
+                        </div>
+                        <div
+                            class="form-row">
+                            <div
+                                class="col-md-12">
+                                <div
+                                    class="form-row">
+                                    <div
+                                        class="col-md-6">
+                                        <label>Data
+                                            i
+                                            godzina
+                                            wylotu</label>
+                                        <input
+                                            required
+                                            readonly
+                                            class="form-control date-start"
+                                            type="text"
+                                            mwlFlatpickr
+                                            [formControl]="startDate"
+                                            (ngModelChange)="validateDate()"
+                                            name="date1"
+                                            [altInput]="true"
+                                            [clickOpens]="false"
+                                            [convertModelValue]="true"
+                                            [enable]="enable"
+                                            [enableTime]="true"
+                                            [time24hr]="true"
+                                            dateFormat="Y-m-dTH:i"
+                                            altFormat="Y-m-d, H:i"
+                                            placeholder="YYYY-MM-DD, HH-MM" />
+                                    </div>
+                                    <div
+                                        class="col-md-6">
+                                        <label>Data
+                                            i
+                                            godzina
+                                            przylotu</label>
+                                        <input
+                                            required
+                                            class="form-control date-end"
+                                            type="text"
+                                            mwlFlatpickr
+                                            [formControl]="endDate"
+                                            (ngModelChange)="validateDate()"
+                                            name="date2"
+                                            [altInput]="true"
+                                            [clickOpens]="false"
+                                            [convertModelValue]="true"
+                                            [enable]="enable"
+                                            [enableTime]="true"
+                                            [time24hr]="true"
+                                            dateFormat="Y-m-dTH:i"
+                                            altFormat="Y-m-d, H:i"
+                                            placeholder="YYYY-MM-DD, HH-MM" />
+                                        <span
+                                            class="error"
+                                            *ngIf="dateError">Data
+                                            przylotu
+                                            nie
+                                            może
+                                            być
+                                            wcześniejsza</span>
+
+                                    </div>
+
+                                </div>
+                                <div
+                                    class="form-row">
+                                    <div
+                                        class="col-md-6">
+                                        <label>Miejsce
+                                            wylotu</label>
+                                        <select
+                                            required
+                                            disabled
+                                            id="startPlace"
+                                            name="startPlace"
+                                            [formControl]="startPlace"
+                                            class="form-control browser-default custom-select">
+                                            <option
+                                                selected
+                                                disabled
+                                                value="">
+                                                Punkt
+                                                startowy
+                                            </option>
+                                            <option
+                                                *ngFor="let start of flightStart"
+                                                [value]="start">
+                                                {{start}}
+                                            </option>
+                                        </select>
+                                        <span
+                                            class="error"
+                                            *ngIf="startPlace.touched && !startPlace.valid">Wybierz
+                                            punkt
+                                            startowy</span>
+                                    </div>
+                                    <div
+                                        class="col-md-6">
+                                        <label>Miejsce
+                                            przylotu</label>
+                                        <select
+                                            required
+                                            disabled
+                                            id="endPlace"
+                                            name="endPlace"
+                                            [formControl]="endPlace"
+                                            class="form-control browser-default custom-select">
+                                            <option
+                                                selected
+                                                disabled
+                                                value="">
+                                                Punkt
+                                                końcowy
+                                            </option>
+                                            <option
+                                                *ngFor="let end of flightEnd"
+                                                [value]="end">
+                                                {{end}}
+                                            </option>
+                                        </select>
+                                        <span
+                                            class="error"
+                                            *ngIf="endPlace.touched && !endPlace.valid">Wybierz
+                                            punkt
+                                            końcowy</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="col-md-12 button">
+                                <button
+                                    [disabled]="!form.valid && !dateError"
+                                    type="button"
+                                    mdbBtn
+                                    color="primary"
+                                    mdbWavesEffect
+                                    class="search_btn"
+                                    (click)="addToCart()">
+                                    DODAJ
+                                    DO
+                                    KOSZYKA
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mdb-card-text>
+
+            </mdb-card-body>
+        </mdb-card>
+        <div class="space"></div>
+        <mdb-card id="list"
+            class="col-md-6">
+            <mdb-card-body>
+                <mdb-card-title>
+                    <h5>Lista Lotów
+                    </h5>
+                </mdb-card-title>
+                <mdb-card-text
+                    *ngIf="filterFlights.length === 0">
+                    Brak lotów o
+                    podanych parametrach
+                </mdb-card-text>
+                <mdb-card-text>
+
+                    <table mdbTable
+                        small="true"
+                        striped="true">
+                        <tbody>
+                            <tr mdbTableCol
+                                *ngFor="let flight of filterFlights">
+                                <td>
+                                    ({{flight.shortStart}})
+                                    <mdb-icon
+                                        fas
+                                        icon="exchange-alt">
+                                    </mdb-icon>
+                                    ({{flight.shortEnd}})
+                                </td>
+                                <td>
+                                    {{flight.startDate.getFullYear()}}-{{getMonth(flight.startDate.getMonth())}}-{{getDay(flight.startDate.getDay())}},
+                                    {{getHour(flight.startDate.getHours())}}:{{getMinute(flight.startDate.getMinutes())}}
+                                </td>
+                                <td>
+                                    <button
+                                        class="arrow"
+                                        routerLink="/reservations/{{flight.id}}">
+                                        <mdb-icon
+                                            far
+                                            icon="arrow-alt-circle-right">
+                                        </mdb-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div
+                    class="loadMore">
+                    <span>
+                        ZAŁADUJ
+                        WIĘCEJ
+                    </span>
+                </div>
+                </mdb-card-text>
+
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

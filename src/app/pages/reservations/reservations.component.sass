@@ -1,0 +1,100 @@
+.wrapper
+    width: 100vw
+    height: auto
+    padding-top: 80px
+    display: flex
+    justify-content: center
+
+    .content
+        width: 100%
+        max-width: 940px
+        margin-top: 20px
+        z-index: 1
+        display: flex
+        justify-content: center
+        padding: 20px
+
+        .card
+            margin: 10px
+
+        .button
+            display: flex
+            justify-content: center
+
+        #search.card
+            background-color: #ffffffe8
+
+        .title
+            display: flex
+            justify-content: space-between
+
+            span
+                color: #319CFF
+                font-weight: bold
+
+        #list.card
+
+            tbody
+                width: 100%
+            .arrow
+                border: none
+                font-size: 20px
+                margin: 0
+                padding: 0
+                background: none
+    form
+        .md-form.input-group .form-control
+            padding: .375rem 0
+
+        .form-control.ng-touched.ng-invalid
+            border: 2px solid red
+
+        .form-control.ng-touched.ng-valid
+            border: 2px solid #80e7f5
+        .input-group
+            display: flex
+            flex-direction: column
+        .error
+            font-size: .7rem
+            color: red
+        .show
+            display: flex
+
+        .hide
+            display: none
+
+        input,
+        input::placeholder
+            background-color: white
+            color: #319CFF
+
+        select
+            font-size: 1rem
+            font-weight: 100
+            color: #319CFF
+
+            &:invalid
+                color: #319CFF
+
+            option
+                font-size: 1.2rem
+                color: #757575
+                background-color: white
+                padding: 10px
+    .loadMore
+        display: flex
+        align-items: center
+        justify-content: center
+        span
+            text-align: center
+            color: #319CFF
+            font-weight: bold
+
+            &:hover
+                cursor: pointer
+
+@media (max-width: 768px)
+    .wrapper
+        .content
+            padding: 0
+            flex-direction: column
