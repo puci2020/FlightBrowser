@@ -21,9 +21,9 @@ export class NavbarComponent implements OnInit {
   getCart(): string{
     if (localStorage.getItem('cart')) {
       return this.cart = localStorage.getItem('cart');
-   } else {
-     return this.cart = '0';
-   }
+    } else {
+      return this.cart = '0';
+    }
   }
 
   ngOnInit(): void {

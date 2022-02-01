@@ -121,4 +121,5 @@ export class FlightsComponent implements OnInit {
       return minute.toString();
     }
   }
+
 }

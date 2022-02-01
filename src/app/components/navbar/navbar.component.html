@@ -1,77 +1,77 @@
 <header>
-<nav>
+  <nav>
     <div class="container">
-        <input type="checkbox"
-            name=""
-            id="check">
+      <input type="checkbox"
+             name=""
+             id="check">
 
-        <div class="nav-btn">
-            <div class="nav-links">
-                <ul>
-                    <li class="nav-link"
-                        style="--i: .6s">
-                        <button
-                        (click)="closeSidebar()"
-                        routerLink="/"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}"
-                        type="button"
-                        mdbBtn
-                        color="primary"
-                        mdbWavesEffect>LOTY
-                    </button>
-                    </li>
-                    <li class="nav-link"
-                        style="--i: .6s">
-                        <button
-                        (click)="closeSidebar()"
-                        routerLink="/reservations"
-                        routerLinkActive="active"
-                        type="button"
-                        mdbBtn
-                        color="primary"
-                        mdbWavesEffect>REZERWACJA
-                    </button>
-                    </li>
-                </ul>
-            </div>
+      <div class="nav-btn">
+        <div class="nav-links">
+          <ul>
+            <li class="nav-link"
+                style="--i: .6s">
+              <button
+                (click)="closeSidebar()"
+                routerLink="/"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                type="button"
+                mdbBtn
+                color="primary"
+                mdbWavesEffect>LOTY
+              </button>
+            </li>
+            <li class="nav-link"
+                style="--i: .6s">
+              <button
+                (click)="closeSidebar()"
+                routerLink="/reservations"
+                routerLinkActive="active"
+                type="button"
+                mdbBtn
+                color="primary"
+                mdbWavesEffect>REZERWACJA
+              </button>
+            </li>
+          </ul>
+        </div>
 
-            <div class="log-sign"
-                style="--i: 1s">
-                <button
-                    (click)="closeSidebar()"
-                    type="button"
-                    mdbBtn
-                    color="primary"
-                    class="cart"
-                    mdbWavesEffect>
+        <div class="log-sign"
+             style="--i: 1s">
+          <button
+            (click)="closeSidebar()"
+            type="button"
+            mdbBtn
+            color="primary"
+            class="cart"
+            mdbWavesEffect>
                     <span
-                        class="badge badge-pill red count">{{getCart()}}</span>
-                    <i
-                        class="fas fa-shopping-cart pl-0"></i>
-                </button>
-                <div>
-                    <button
-                        (click)="closeSidebar()"
-                        type="button"
-                        mdbBtn
-                        color="primary"
-                        mdbWavesEffect><span class="user">JAN
+                      class="badge badge-pill red count">{{getCart()}}</span>
+            <i
+              class="fas fa-shopping-cart pl-0"></i>
+          </button>
+          <div>
+            <button
+              (click)="closeSidebar()"
+              type="button"
+              mdbBtn
+              color="primary"
+              mdbWavesEffect><span class="user">JAN
                         KOWALSKI</span>
-                        <mdb-icon far
-                            icon="user-circle">
-                        </mdb-icon>
-                    </button>
-                </div>
-            </div>
+              <mdb-icon far
+                        icon="user-circle">
+              </mdb-icon>
+            </button>
+          </div>
         </div>
+      </div>
 
-        <div
-            class="hamburger-menu-container">
-            <div class="hamburger-menu">
-                <div></div>
-            </div>
+      <div
+        class="hamburger-menu-container">
+        <div class="hamburger-menu">
+          <div></div>
         </div>
+      </div>
     </div>
-</nav>
+  </nav>
 </header>
